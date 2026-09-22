@@ -15,7 +15,7 @@ The Caprae M&A Acquisition Scoring Engine is a web-based analyst tool built to a
 ## Features
 
 - **Single company scorer** — Fill out a form and receive a full AI-generated acquisition score instantly
-- **Batch scoring** — Upload a CSV of up to 20 companies and score them sequentially with one click
+- **Batch scoring** — Upload a CSV and score multiple companies sequentially with one click
 - **Per-criterion breakdown** — Six scored criteria with individual score bars and rationale text
 - **Deal thesis** — A 3–5 sentence narrative on acquisition fit specific to each company
 - **Red flags & next steps** — Surfaced risks and prioritised follow-up actions per target

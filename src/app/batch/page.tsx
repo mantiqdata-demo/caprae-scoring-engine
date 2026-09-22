@@ -257,7 +257,7 @@ export default function BatchPage() {
             disabled={running}
             className="px-5 py-2 bg-gold text-black text-sm font-semibold hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
           >
-            {running ? "Scoring…" : `Score ${rows.length} Companies`}
+            {running ? "Scoring…" : "Score Companies"}
           </button>
         )}
         {rows.some((r) => r.result) && (
