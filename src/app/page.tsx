@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Papa from "papaparse";
 import CompanyForm from "@/components/CompanyForm";
 import { CompanyInput, ScoreResult } from "@/types";
 
@@ -41,6 +42,31 @@ export default function ScorerPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ScoreResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  function exportCSV() {
+    if (!result) return;
+    const csv = Papa.unparse([{
+      company_name: input.companyName,
+      industry: input.industry,
+      estimated_revenue: input.estimatedRevenue,
+      employee_count: input.employeeCount,
+      location: input.location,
+      business_model: input.businessModel,
+      years_in_business: input.yearsInBusiness,
+      owner_type: input.ownerType,
+      composite_score: Math.round(result.composite_score),
+      deal_thesis: result.deal_thesis,
+      red_flags: result.red_flags.join(" | "),
+      next_steps: result.next_steps.join(" | "),
+    }]);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${input.companyName.replace(/\s+/g, "-").toLowerCase()}-score.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 
   async function handleSubmit() {
     setLoading(true);
@@ -117,6 +143,16 @@ export default function ScorerPage() {
           <div className="border border-border bg-surface px-6 py-5">
             <div className="text-xs font-medium text-zinc-400 uppercase tracking-wider mb-3">Deal Thesis</div>
             <p className="text-sm text-zinc-300 leading-relaxed">{result.deal_thesis}</p>
+          </div>
+
+          {/* Export */}
+          <div className="flex justify-end">
+            <button
+              onClick={exportCSV}
+              className="px-5 py-2 border border-border text-sm text-zinc-300 hover:border-gold hover:text-white transition-colors"
+            >
+              Export Score
+            </button>
           </div>
 
           {/* Red flags & next steps */}

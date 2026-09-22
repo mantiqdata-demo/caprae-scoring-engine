@@ -118,6 +118,32 @@ export default function BatchPage() {
   const [selected, setSelected] = useState<BatchRow | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  function exportCSV() {
+    const scored = rows.filter((r) => r.result);
+    const data = scored.map((r) => ({
+      company_name: r.input.companyName,
+      industry: r.input.industry,
+      estimated_revenue: r.input.estimatedRevenue,
+      employee_count: r.input.employeeCount,
+      location: r.input.location,
+      business_model: r.input.businessModel,
+      years_in_business: r.input.yearsInBusiness,
+      owner_type: r.input.ownerType,
+      composite_score: Math.round(r.result!.composite_score),
+      deal_thesis: r.result!.deal_thesis,
+      red_flags: r.result!.red_flags.join(" | "),
+      next_steps: r.result!.next_steps.join(" | "),
+    }));
+    const csv = Papa.unparse(data);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "caprae-scored-companies.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -232,6 +258,14 @@ export default function BatchPage() {
             className="px-5 py-2 bg-gold text-black text-sm font-semibold hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
           >
             {running ? "Scoring…" : `Score ${rows.length} Companies`}
+          </button>
+        )}
+        {rows.some((r) => r.result) && (
+          <button
+            onClick={exportCSV}
+            className="px-5 py-2 border border-border text-sm text-zinc-300 hover:border-gold hover:text-white transition-colors"
+          >
+            Export CSV
           </button>
         )}
       </div>
