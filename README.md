@@ -8,7 +8,7 @@ The Caprae M&A Acquisition Scoring Engine is a web-based analyst tool built to a
 
 ## Live Demo
 
-[Live Demo](your-vercel-url-here)
+[Live Demo](https://caprae-scoring-engine.vercel.app/)
 
 ---
 
