@@ -24,6 +24,19 @@ The Caprae M&A Acquisition Scoring Engine is a web-based analyst tool built to a
 
 ---
 
+## Screenshots
+
+### Single Company Scorer — Input Form
+![Form](public/screenshots/single-scorer-form.png)
+
+### Single Company Scorer — Score Card
+![Score Card](public/screenshots/single-scorer-result.png)
+
+### Batch Scorer
+![Batch Scorer](public/screenshots/batch-scorer.png)
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -87,6 +100,18 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## Sample Data
+
+A sample CSV file is included for testing the batch scorer:
+
+```bash
+samples/test-batch.csv
+```
+
+Upload this file on the Batch Scoring page to see the engine score 10 real lower-middle-market acquisition targets across HVAC, dental, landscaping, plumbing, travel, pest control, IT services, roofing, accounting, and staffing industries.
 
 ---
 
