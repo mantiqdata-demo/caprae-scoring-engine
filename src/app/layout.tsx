@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-background text-white font-sans">
         <Navigation />
         <main className="max-w-5xl mx-auto px-4 py-10">{children}</main>
+        <Analytics />
       </body>
     </html>
   );
